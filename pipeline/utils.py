@@ -1,7 +1,8 @@
 """
 Welcome to the Utilities function libary for the Energy Data Analytics Lab Bass Connections Project. 
 This library of functions will be useful for extracting and manipulating Indian village data.
-This file, named utils.py, should be in the same directory as feature_extraction.ipynb, as this notebook imports and utlizes some of these functions. 
+This file, named utils.py, should be in the same directory as the 'Feature Extraction Main' notebook, as this notebook imports 
+and utlizes some of these functions. 
 Thorough descriptions and docstrings for each function are provided in the definitions. 
 For additional clarification, feel free to reach out to a member of the 2017-2018 team. 
 
@@ -199,7 +200,8 @@ def clean_read_numerical(path: str):
 def interpolate(df: pd.DataFrame): 
     """
     Returns the DataFrame with missing values filled in using column (axis = 1) interpolation. 
-    For example, if we're missing data for the month of March, the surrounding months of January and February will be averaged and imputed for March. 
+    For example, if we're missing data for the month of March, the surrounding months of January
+    and February will be averaged and imputed for March. 
     Edge cases are considered negligible and are ignored. 
     """
     df = df.interpolate(axis=1)
@@ -226,7 +228,7 @@ def upsample(df: pd.DataFrame):
     Arguments: 
     df: DataFrame containing all training DataFrame 
 
-    Returns: A DataFrame with upsampled minority class (unelectrified villages) and downsampled majority class (electrified)
+    Returns: DataFrame with upsampled minority class (unelectrified villages) and downsampled majority class (electrified)
     """
     df0 = df[df.electric_category == 0]
     df1 = df[df.electric_category == 1]
@@ -365,7 +367,7 @@ def advanced_metrics_rf(X_test, Y_test, predictions):
     print("ROC-AUC-Score:", roc_auc_score(Y_test, y_scores))
 
 """
-Note: Check models_test.ipynb for code on Cross Validation, feature importances, etc. 
+Note: Check Models Test notebook for code on Cross Validation, feature importances, etc. 
 """
 
 def plot_precision_vs_recall(Y_test, X_test):
