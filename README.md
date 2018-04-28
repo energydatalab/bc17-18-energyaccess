@@ -3,7 +3,7 @@
 
 ## Project Repository
 
-### Key Files (found in pipeline/ directory)
+### Key Files (found in 'pipeline' directory)
 1. utils.py - This library of fully documented functions will be useful for extracting and preprocessing Indian village data, as well as evaluating model performances. 
 2. Feature Extraction Main - iPython Notebook that goes hand-in-hand with above utils.py to extract village features. 
 3. bce.py - Library of preprocessing and classification functions 
