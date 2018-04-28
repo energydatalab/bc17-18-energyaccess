@@ -16,12 +16,12 @@ In the end our chosen model was a Gradient Boosting Classifier, and as this is a
 
 Technologies Used
 This work would not be possible without amazing and free open-source data science libraries and front-end development tools. 
-1. Python for Data Science ecosystem for data analysis (jupyter notebook, numpy, pandas, skimage)
+1. Python for Data Science ecosystem for data analysis (jupyter notebook, numpy, pandas, skimage) and scikit-learn for machine learning
 2. matplotlib, seaborn for data visualization 
-3. Google Earth Engine
-4. VIIRS Imagery
+3. Google Earth Engine for data
+4. VIIRS Imagery for data
 
 Recognition 
-1. Our research poster won 1st Place at the 2018 Duke University Research Computing Symposium!
-2. We receieved an Honorable Mention at the 2018 State Energy Conference of North Carolina
+1. Our research poster won [1st Place](https://energy.duke.edu/news/energy-data-analytics-lab-team-takes-top-prize-2018-duke-research-computing-symposium) at the 2018 Duke University [Research Computing Symposium](https://rc.duke.edu/2018-symposium/)!
+2. We receieved an Honorable Mention at the 2018 [State Energy Conference of North Carolina](https://ncenergyconference.com/)
 3. Our team leader, Brian Wong, was awarded the Bass Connections Award for Outstanding Mentorship!
