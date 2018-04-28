@@ -30,4 +30,4 @@ This work would not be possible without amazing and free open-source data scienc
 3. Our team leader, Brian Wong, was awarded the Bass Connections [Award](https://bassconnections.duke.edu/about/news/nominate-team-member-bass-connections-award-outstanding-mentorship) for Outstanding Mentorship!
 
 Team Members   
-McCourt Hu, Prithvir Jhaveri, Harshvardhan Sanghi, Joe Squillace, Brian Wong, Xiaolan You, Shamikh Hossain (ssh50@duke.edu) 
+McCourt Hu, Prithvir Jhaveri, Harshvardhan Sanghi, Joe Squillace, Brian Wong, Xiaolan You, Shamikh Hossain [ssh50@duke.edu]
