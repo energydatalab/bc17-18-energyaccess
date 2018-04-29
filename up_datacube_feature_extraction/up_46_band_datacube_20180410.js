@@ -1,4 +1,19 @@
-//Base script: https://code.earthengine.google.com/db05061a8db023ef4e4913ef3b7e4c42
+/*
+Script Objective: feature extraction
+Loction: Uttar Pradesh (but can adjusted for anywhere)
+
+The 2017-2018 Bass Connections in Energy Access team used this Google Earth Engine script to extract
+features for Uttar Pradesh, India.
+
+Due to differences in pixel sizes for different categories of bands (e.g. VIIRS = 500m resolution, whereas
+Landsat-8 spectral bands = 30m), the script needs to be run once for each scale. This can be done simply
+by changing the 'resolution' variable on line 207.
+
+The output is a CSV to your Google Drive of choice.
+
+Base Google Earth Engine script: https://code.earthengine.google.com/db05061a8db023ef4e4913ef3b7e4c42
+
+*/
 
 //////---- VARIABLES -----//////
 var grid = ee.FeatureCollection('users/xlany/grid_5km_exact'); //grid length = 638k
@@ -150,50 +165,15 @@ var all_final = greenestCloudfreeComposite
 
 print(all_final)  
 
-//=================== COLLAPSING NDVI AND GREEN INDEX BANDS TO REDUCE NODATA ISSUE ===================
-
-// var ndvi_q1 = all_final.select('01NDVI', '02NDVI', '03NDVI').reduce(ee.Reducer.mean()).rename('01_03_NDVI').mask(irr_ag)
-// var ndvi_q2 = all_final.select('04NDVI', '05NDVI', '06NDVI').reduce(ee.Reducer.mean()).rename('04_06_NDVI').mask(irr_ag)
-// var ndvi_q3 = all_final.select('07NDVI', '08NDVI', '09NDVI').reduce(ee.Reducer.mean()).rename('07_09_NDVI').mask(irr_ag)
-// var ndvi_q4 = all_final.select('10NDVI', '11NDVI', '12NDVI').reduce(ee.Reducer.mean()).rename('10_12_NDVI').mask(irr_ag)
-
-// var green_q1 = all_final.select('01GREEN', '02GREEN', '03GREEN').reduce(ee.Reducer.mean()).rename('01_03_GREEN').mask(irr_ag)
-// var green_q2 = all_final.select('04GREEN', '05GREEN', '06GREEN').reduce(ee.Reducer.mean()).rename('04_06_GREEN').mask(irr_ag)
-// var green_q3 = all_final.select('07GREEN', '08GREEN', '09GREEN').reduce(ee.Reducer.mean()).rename('07_09_GREEN').mask(irr_ag)
-// var green_q4 = all_final.select('10GREEN', '11GREEN', '12GREEN').reduce(ee.Reducer.mean()).rename('10_12_GREEN').mask(irr_ag)
-
-//=================== RE-MERGE THE FINAL IMAGE-CUBE ===================
-
-// var all_final = all_final.select(['B1','B2','B3','B4','B5','B6','B7','B10','B11', '01RAIN', '02RAIN', '03RAIN', 
-//   '04RAIN', '05RAIN', '06RAIN', '07RAIN', '08RAIN', '09RAIN', '10RAIN', '11RAIN', '12RAIN', '01VIIRS', '02VIIRS',
-//   '03VIIRS', '04VIIRS', '05VIIRS', '06VIIRS', '07VIIRS', '08VIIRS', '09VIIRS', '10VIIRS', '11VIIRS', '12VIIRS'])
-//   .addBands(ndvi_q1).addBands(ndvi_q2).addBands(ndvi_q3).addBands(ndvi_q4)
-//   .addBands(green_q1).addBands(green_q2).addBands(green_q3).addBands(green_q4)
-//   .addBands(landscan)
-// var all_final = all_final.select(['B1','B2','B3','B4','B5','B6','B7','B10','B11', '01VIIRS', '02VIIRS',
-//   '03VIIRS', '04VIIRS', '05VIIRS', '06VIIRS', '07VIIRS', '08VIIRS', '09VIIRS', '10VIIRS', '11VIIRS', '12VIIRS'])
-//   .addBands(ndvi_q1).addBands(ndvi_q2).addBands(ndvi_q3).addBands(ndvi_q4)
-//   .addBands(green_q1).addBands(green_q2).addBands(green_q3).addBands(green_q4)
-//   .addBands(landscan)
-
-// new band order:
-// b1-b9 = l8
-// b10-b21 = rainfall x
-// b22-b31 = viirs x
-// b32-b35 = NDVI 
-// b36-b39 = GI
-// b42 = pop density x
-// b43 = hbase prob
-
-/* Resolution for referece:
+/* Band Resolution for Referece:
 viirs = 500m
 l8 = 30m
-ndvi = 30m
-green = 30m
-IMERG_V04 = 10km
+ndvi = 250m
+evi = 250m
 POP_DENS = 1km
 */
 
+// lists of band names for loops with system_ind to make joins from imagery to grid
 //split into groups by resolution 
 //also split by subgroups if necessary (e.g. b vs vegetation) for runtime purposes
 
@@ -207,6 +187,8 @@ var bihar_att_veg = ['system_ind', '01NDVI', '02NDVI', '03NDVI', '04NDVI', '05ND
   '02EVI', '03EVI', '04EVI', '05EVI', '06EVI', '07EVI', '08EVI', '09EVI', '10EVI', '11EVI', '12EVI']
 
 var bihar_att_pop = ['system_ind', 'POP_DENS']
+
+// lists of band names for loops
 
 var thirty_m = ['B1','B2','B3','B4','B5','B6','B7','B10','B11']
 
@@ -223,6 +205,7 @@ var one_km = ['POP_DENS']
 var ten_km = ['01RAIN', '02RAIN', '03RAIN', '04RAIN', '05RAIN', '06RAIN', '07RAIN', 
   '08RAIN', '09RAIN', '10RAIN', '11RAIN', '12RAIN']
 
+// pick which bands to run here. need to run once for each band resolution
 var resolution = two_hundred_fifty_m
 var fc = quasivillages
 
